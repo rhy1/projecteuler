@@ -49,12 +49,12 @@ def CountDivisors(_n):
 	# число натуральных делителей _n
 	result = 0
 	i = 1
-	sqrt = _n ** 0.5
-	while i < sqrt:
+	sqrtn = sqrt(_n)
+	while i < sqrtn:
 		if _n % i == 0:
 			result += 2
 		i += 1
-	if (_n ** 0.5 == round(sqrt)) and (_n != 1):
+	if (_n ** 0.5 == round(sqrtn)) and (_n != 1):
 		result += 1
 	return result
 
@@ -62,14 +62,14 @@ def ListDivisors(_n):
 	# натуральные делители _n, меньшие _n
 	result = [1]
 	i = 2
-	sqrt = _n ** 0.5
-	while i < sqrt:
+	sqrtn = sqrt(_n)
+	while i < sqrtn:
 		if _n % i == 0:
 			result.append(i)
 			result.append(_n / i)
 		i += 1
-	if (sqrt == round(sqrt)) and (_n != 1):
-		result.append(sqrt)
+	if (sqrtn == round(sqrtn)) and (_n != 1):
+		result.append(sqrtn)
 	return result
 
 def ListDivisorPairs(_n):
@@ -77,13 +77,13 @@ def ListDivisorPairs(_n):
 	# причем делитель1 <= делитель2
 	result = [(1, _n)]
 	i = 2
-	sqrt = _n ** 0.5
-	while i < sqrt:
+	sqrtn = sqrt(_n)
+	while i < sqrtn:
 		if _n % i == 0:
 			result.append((i, _n / i))
 		i += 1
-	if (sqrt == round(sqrt)) and (_n != 1):
-		result.append((sqrt, sqrt))
+	if (sqrtn == round(sqrtn)) and (_n != 1):
+		result.append((sqrtn, sqrtn))
 	return result
 
 def IsPalindrome(_s):
@@ -160,24 +160,38 @@ def DigitSum(_n):
 		result += int(s[i])
 	return result
 
+# def AreRelPrime(_a, _b):
+# 	# checks if numbers are relatively prime
+# 	aDivisors = []
+# 	i = 2
+# 	sqrt = _a ** 0.5
+# 	while i < sqrt:
+# 		if _a % i == 0:
+# 			aDivisors.append(i)
+# 		i += 1
+# 	if (sqrt == round(sqrt)) and (_a != 1):
+# 		aDivisors.append(sqrt)
+# 	i = 2
+# 	sqrt = _b ** 0.5
+# 	while i < sqrt:
+# 		if (_b % i == 0) and (i in aDivisors):
+# 			return False
+# 		i += 1
+# 	if (sqrt == round(sqrt)) and (_b != 1) and (sqrt in aDivisors):
+# 		return False
+# 	return True
+
 def AreRelPrime(_a, _b):
-	# checks if numbers are relatively prime
-	aDivisors = []
-	i = 2
-	sqrt = _a ** 0.5
-	while i < sqrt:
-		if _a % i == 0:
-			aDivisors.append(i)
-		i += 1
-	if (sqrt == round(sqrt)) and (_a != 1):
-		aDivisors.append(sqrt)
-	i = 2
-	sqrt = _b ** 0.5
-	while i < sqrt:
-		if (_b % i == 0) and (i in aDivisors):
+	if (_a % 2 == 0) and (_b % 2 == 0):
+		return False
+	if _a > _b:
+		a, b = b, a		# so a <= b now
+	sqrta = sqrt(_a)
+	isqrta = int(sqrta)
+	for i in xrange(3, isqrta):
+		if (_a % i == 0) and (_b % i == 0):
 			return False
-		i += 1
-	if (sqrt == round(sqrt)) and (_b != 1) and (sqrt in aDivisors):
+	if (sqrta == isqrta) and (_b % sqrta):
 		return False
 	return True
 
