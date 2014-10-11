@@ -18,8 +18,8 @@ if __name__ == "__main__":
 	startTime = time.time()
 	result = 0
 
-	TARGET_NUMBER = 1500	# DEBUG, should be 1000000 here
-	PROCESS_COUNT = 3
+	TARGET_NUMBER = 1000000
+	PROCESS_COUNT = 1
 	manager = multiprocessing.Manager()
 	processResults = manager.list([])
 	processes = []
