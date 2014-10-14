@@ -19,7 +19,7 @@ if __name__ == "__main__":
 	result = 0
 
 	TARGET_NUMBER = 1000000
-	PROCESS_COUNT = 1
+	PROCESS_COUNT = 3
 	manager = multiprocessing.Manager()
 	processResults = manager.list([])
 	processes = []
